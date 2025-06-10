@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DCG Media - Influencer Outreach for Fashion Brands</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0a0a0a;
+            --surface: #111111;
+            --text-primary: #ffffff;
+            --text-secondary: #e5e5e5;
+            --text-muted: #cccccc;
+            --accent: #7c3aed;
+            --accent-light: #a78bfa;
+            --accent-glow: rgba(124, 58, 237, 0.4);
+            --border: rgba(255, 255, 255, 0.08);
+            --max-width: 1200px;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: white;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: 18px;
+            font-weight: 500;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Noise texture */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            z-index: 1;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Container */
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 24px 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        nav.scrolled {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-light);
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 28px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #6d28d9;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px var(--accent-glow);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-text {
+            color: var(--text-secondary);
+            background: none;
+            padding: 0;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            text-decoration-thickness: 1px;
+        }
+
+        .btn-text:hover {
+            color: var(--text-primary);
+        }
+
+        /* Language Switch */
+        .lang-switch {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .lang-switch:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--accent);
+        }
+
+        .lang-switch.mobile-only {
+            display: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 120px 0 80px;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+
+        .hero-gradient {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            filter: blur(100px);
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(124, 58, 237, 0.1);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            border-radius: 100px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--accent-light);
+            margin-bottom: 32px;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 6vw, 72px);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            animation: fadeInUp 0.6s ease-out 0.1s both;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 24px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 48px;
+            font-weight: 500;
+            animation: fadeInUp 0.6s ease-out 0.2s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.6s ease-out 0.3s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-label {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+
+        .section-description {
+            font-size: 20px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 500;
+        }
+
+        /* Feature Cards */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(124, 58, 237, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .feature-number {
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--accent);
+            opacity: 0.2;
+            margin-bottom: 16px;
+            line-height: 1;
+        }
+
+        .feature-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 48px;
+            padding: 48px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--accent);
+            letter-spacing: -0.02em;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        /* Process Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 24px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 72px;
+            padding-bottom: 48px;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 16px;
+            top: 8px;
+            width: 16px;
+            height: 16px;
+            background: var(--surface);
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            border-color: rgba(124, 58, 237, 0.3);
+            transform: translateX(4px);
+        }
+
+        .timeline-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .timeline-description {
+            color: var(--text-secondary);
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        /* Testimonial */
+        .testimonial {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-quote {
+            font-size: 26px;
+            line-height: 1.5;
+            margin-bottom: 32px;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .author-info {
+            text-align: left;
+        }
+
+        .author-name {
+            font-weight: 700;
+            margin-bottom: 4px;
+            font-size: 18px;
+        }
+
+        .author-title {
+            font-size: 16px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Pricing */
+        .pricing-card {
+            background: var(--surface);
+            border: 2px solid var(--accent);
+            border-radius: 24px;
+            padding: 48px;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+        }
+
+        .pricing-highlight {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: white;
+            padding: 6px 20px;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 32px 0;
+        }
+
+        .pricing-features li {
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .check-icon {
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .check-icon::after {
+            content: '✓';
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .barter-section {
+            background: rgba(124, 58, 237, 0.1);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 32px 0;
+        }
+
+        .barter-section h4 {
+            font-size: 20px;
+            margin-bottom: 8px;
+            color: var(--accent-light);
+            font-weight: 700;
+        }
+
+        .barter-section p {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        /* FAQ */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+            padding: 24px 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 20px;
+            transition: color 0.2s ease;
+        }
+
+        .faq-question:hover {
+            color: var(--accent);
+        }
+
+        .faq-arrow {
+            font-size: 16px;
+            transition: transform 0.3s ease;
+            color: var(--text-primary);
+        }
+
+        .faq-item.active .faq-arrow {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: var(--text-secondary);
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding-top: 16px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(167, 139, 250, 0.1) 100%);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            border-radius: 24px;
+            padding: 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 50%);
+            opacity: 0.3;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(0.8); opacity: 0.3; }
+            50% { transform: scale(1); opacity: 0.5; }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-title {
+            font-size: 44px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .cta-description {
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            padding: 48px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--text-primary);
+        }
+
+        .copyright {
+            color: var(--text-muted);
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .lang-switch.mobile-only {
+                display: block;
+            }
+
+            .nav-container {
+                gap: 16px;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .hero-description {
+                font-size: 20px;
+            }
+
+            .section {
+                padding: 80px 0;
+            }
+
+            .section-header {
+                margin-bottom: 48px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-section {
+                padding: 48px 24px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Founder Image */
+        .founder-img {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .founder-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px var(--accent-glow);
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="container">
+            <div class="nav-container">
+                <div class="logo">DCG Media</div>
+                <button class="lang-switch mobile-only" onclick="toggleLanguage()">中文</button>
+                <div class="nav-links">
+                    <a href="#services" class="nav-link" data-en="Services" data-cn="服务">Services</a>
+                    <a href="#process" class="nav-link" data-en="Process" data-cn="流程">Process</a>
+                    <a href="#testimonial" class="nav-link" data-en="Results" data-cn="成果">Results</a>
+                    <a href="#pricing" class="nav-link" data-en="Pricing" data-cn="定价">Pricing</a>
+                    <button class="lang-switch" onclick="toggleLanguage()">中文</button>
+                    <a href="#cta" class="btn btn-primary" data-en="Get Started" data-cn="开始合作">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background">
+            <div class="hero-gradient"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span>🚀</span>
+                    <span data-en="Pay After Posting • No Retainers" data-cn="发文后付费 • 无预付款">Pay After Posting • No Retainers</span>
+                </div>
+                <h1 data-en="Influencer Outreach for <span class='gradient-text'>Fashion Brands</span>" data-cn="时尚品牌的<span class='gradient-text'>网红推广</span>">Influencer Outreach for <span class="gradient-text">Fashion Brands</span></h1>
+                <p class="hero-description" data-en="We handle your influencer partnerships from first contact to posted content. Only pay for secured collaborations." data-cn="我们处理您的网红合作从初次联系到内容发布的全过程。只为成功达成的合作付费。">
+                    We handle your influencer partnerships from first contact to posted content.
+                    Only pay for secured collaborations.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#cta" class="btn btn-primary" data-en="Get Started" data-cn="开始合作">Get Started</a>
+                    <a href="#process" class="btn btn-secondary" data-en="See Our Process" data-cn="查看我们的流程">See Our Process</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section reveal">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label" data-en="What We Do" data-cn="我们的服务">What We Do</p>
+                <h2 class="section-title" data-en="We Connect Fashion Brands<br>with Influencers" data-cn="连接时尚品牌<br>与网红博主">We Connect Fashion Brands<br>with Influencers</h2>
+                <p class="section-description" data-en="Simple. Transparent. Performance-based." data-cn="简单。透明。基于效果。">
+                    Simple. Transparent. Performance-based.
+                </p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-number">01</div>
+                    <h3 class="feature-title" data-en="Identify the Right Fit" data-cn="精准匹配">Identify the Right Fit</h3>
+                    <p class="feature-description" data-en="We find influencers who match your brand aesthetic and target audience. No spray and pray." data-cn="我们寻找与您品牌美学和目标受众相匹配的网红。精准投放，拒绝盲投。">
+                        We find influencers who match your brand aesthetic and target audience. No spray and pray.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-number">02</div>
+                    <h3 class="feature-title" data-en="Handle All Outreach" data-cn="全程对接">Handle All Outreach</h3>
+                    <p class="feature-description" data-en="From the first DM to negotiating rates, we manage every interaction. You never chase follow-ups." data-cn="从第一条私信到价格谈判，我们管理每一次互动。您无需追踪跟进。">
+                        From the first DM to negotiating rates, we manage every interaction. You never chase follow-ups.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-number">03</div>
+                    <h3 class="feature-title" data-en="Manage the Details" data-cn="细节管理">Manage the Details</h3>
+                    <p class="feature-description" data-en="Content briefs, timelines, approvals - we coordinate everything between you and the influencer." data-cn="内容简报、时间线、审批 - 我们协调您与网红之间的一切事务。">
+                        Content briefs, timelines, approvals - we coordinate everything between you and the influencer.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-number">04</div>
+                    <h3 class="feature-title" data-en="You Pay for Results" data-cn="按效果付费">You Pay for Results</h3>
+                    <p class="feature-description" data-en="Only pay after content is posted. No monthly fees. No minimums." data-cn="只在网红发文后付费。无月费。无最低消费。">
+                        Only pay after content is posted. No monthly fees. No minimums.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="section reveal">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label" data-en="Why Work With Us" data-cn="为什么选择我们">Why Work With Us</p>
+                <h2 class="section-title" data-en="Focus on What Matters" data-cn="专注于重要的事">Focus on What Matters</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3 class="feature-title" data-en="Save 20+ Hours Per Week" data-cn="每周节省20+小时">Save 20+ Hours Per Week</h3>
+                    <p class="feature-description" data-en="Stop spending hours in Instagram DMs. We handle the outreach while you focus on growing your brand." data-cn="不再花费数小时在Instagram私信中。我们处理推广，您专注于品牌成长。">
+                        Stop spending hours in Instagram DMs. We handle the outreach while you focus on growing your brand.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title" data-en="Predictable Investment" data-cn="可预测的投资">Predictable Investment</h3>
+                    <p class="feature-description" data-en="Know exactly what each influencer partnership costs. Budget with clarity." data-cn="准确了解每个网红合作的成本。清晰地制定预算。">
+                        Know exactly what each influencer partnership costs. Budget with clarity.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title" data-en="Higher Response Rates" data-cn="更高的回复率">Higher Response Rates</h3>
+                    <p class="feature-description" data-en="We've tested thousands of messages. We know what converts influencers from &quot;seen&quot; to &quot;yes.&quot;" data-cn="我们测试了数千条信息。我们知道如何让网红从&ldquo;已读&rdquo;变成&ldquo;同意&rdquo;。">
+                        We've tested thousands of messages. We know what converts influencers from "seen" to "yes."
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="feature-title" data-en="No Learning Curve" data-cn="无需学习曲线">No Learning Curve</h3>
+                    <p class="feature-description" data-en="Skip the months of trial and error. I've already made the mistakes personally and refined the process." data-cn="跳过数月的试错。我个人已经犯过错误并完善了流程。">
+                        Skip the months of trial and error. I've already made the mistakes personally and refined the process.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="process" class="section reveal">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label" data-en="Our Process" data-cn="我们的流程">Our Process</p>
+                <h2 class="section-title" data-en="From Brief to Posted Content<br>in 14 Days" data-cn="14天内<br>从简报到发布内容">From Brief to Posted Content<br>in 14 Days</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-line"></div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title" data-en="Day 1-3: Strategy" data-cn="第1-3天：策略">Day 1-3: Strategy</h3>
+                        <p class="timeline-description" data-en="We analyze your brand and identify your target market and matching influencer styles." data-cn="我们分析您的品牌并确定您的目标市场和匹配的网红风格。">
+                            We analyze your brand and identify your target market and matching influencer styles.
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title" data-en="Day 4-10: Outreach" data-cn="第4-10天：推广">Day 4-10: Outreach</h3>
+                        <p class="timeline-description" data-en="Personalized messages sent to pre-vetted influencers. Average response rate: 50%+." data-cn="向预审网红发送个性化信息。平均回复率：50%以上。">
+                            Personalized messages sent to pre-vetted influencers. Average response rate: 50%+.
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title" data-en="Day 11-14: Coordination" data-cn="第11-14天：协调">Day 11-14: Coordination</h3>
+                        <p class="timeline-description" data-en="We handle negotiations and content briefs. You approve, they create." data-cn="我们处理谈判和内容简报。您批准，他们创作。">
+                            We handle negotiations and content briefs. You approve, they create.
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title" data-en="Ongoing: Optimization" data-cn="持续：优化">Ongoing: Optimization</h3>
+                        <p class="timeline-description" data-en="We track what works and continuously optimize for better results." data-cn="我们追踪有效方法并持续优化，获得更好的结果。">
+                            We track what works and continuously optimize for better results.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section id="testimonial" class="section reveal">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label" data-en="Case Study" data-cn="案例研究">Case Study</p>
+                <h2 class="section-title" data-en="How AURA Secured 12 Influencers<br>in Their First Month" data-cn="AURA如何在第一个月<br>获得12位网红合作">How AURA Secured 12 Influencers<br>in Their First Month</h2>
+            </div>
+            <div class="testimonial">
+                <p class="testimonial-quote" data-en="&quot;Before working with DCG Media, I was spending 3 hours daily in DMs with a 5% response rate. They secured 12 influencers in 30 days, and I only paid after content was posted. Game changer for our launch.&quot;" data-cn="&ldquo;在与DCG Media合作之前，我每天花3小时发私信，回复率只有5%。他们在30天内获得了12位网红，我只在内容发布后付费。这对我们的发布来说是游戏规则的改变。&rdquo;">
+                    "Before working with DCG Media, I was spending 3 hours daily in DMs with a 5% response rate. They secured 12 influencers in 30 days, and I only paid after content was posted. Game changer for our launch."
+                </p>
+                <div class="testimonial-author">
+                    <img src="https://i.imgur.com/sDAEhJc.png" alt="Jimmy Parker" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
+                    <div class="author-info">
+                        <div class="author-name">Jimmy Parker</div>
+                        <div class="author-title" data-en="CoFounder at European Jewelry Brand - AURA" data-cn="欧洲珠宝品牌AURA联合创始人">CoFounder at European Jewelry Brand - AURA</div>
+                    </div>
+                </div>
+            </div>
+            <div class="stats-grid" style="margin-top: 48px;">
+                <div class="stat">
+                    <div class="stat-number">47</div>
+                    <div class="stat-label" data-en="Influencers Contacted" data-cn="联系的网红">Influencers Contacted</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">19</div>
+                    <div class="stat-label" data-en="Positive Responses" data-cn="积极回复">Positive Responses</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label" data-en="Secured Collabs" data-cn="达成合作">Secured Collabs</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">186K</div>
+                    <div class="stat-label" data-en="Total Reach" data-cn="总触达">Total Reach</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="section reveal">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label" data-en="Pricing" data-cn="定价">Pricing</p>
+                <h2 class="section-title" data-en="Pay Only After Content is Posted" data-cn="只在内容发布后付费">Pay Only After Content is Posted</h2>
+            </div>
+            <div class="pricing-card">
+                <div class="pricing-highlight" data-en="Custom Pricing" data-cn="定制价格">Custom Pricing</div>
+                <h3 style="font-size: 28px; margin-bottom: 16px;" data-en="Tailored to Your Needs" data-cn="量身定制">Tailored to Your Needs</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 32px; font-size: 18px; font-weight: 500;" data-en="Every brand is unique. We create custom packages based on:" data-cn="每个品牌都是独特的。我们基于以下因素创建定制方案：">
+                    Every brand is unique. We create custom packages based on:
+                </p>
+                <ul class="pricing-features">
+                    <li>
+                        <div class="check-icon"></div>
+                        <span data-en="Influencer tier and reach" data-cn="网红级别和影响力">Influencer tier and reach</span>
+                    </li>
+                    <li>
+                        <div class="check-icon"></div>
+                        <span data-en="Collaboration scope" data-cn="合作范围">Collaboration scope</span>
+                    </li>
+                    <li>
+                        <div class="check-icon"></div>
+                        <span data-en="Campaign volume" data-cn="推广规模">Campaign volume</span>
+                    </li>
+                </ul>
+                <div class="barter-section">
+                    <h4 data-en="Barter Partnerships Available" data-cn="可提供产品置换合作">Barter Partnerships Available</h4>
+                    <p data-en="We've secured hundreds of product-only collaborations with micro-influencers. Perfect for brands looking to maximize reach on limited budgets." data-cn="我们已经与微型网红达成了数百个仅产品置换的合作。非常适合希望在有限预算内最大化触达的品牌。">We've secured hundreds of product-only collaborations with micro-influencers. Perfect for brands looking to maximize reach on limited budgets.</p>
+                </div>
+                <p style="color: var(--text-muted); font-size: 16px; margin-bottom: 32px; font-weight: 500;" data-en="No setup fees. No monthly minimums. Cancel anytime." data-cn="无设置费。无月度最低消费。随时取消。">
+                    No setup fees. No monthly minimums. Cancel anytime.
+                </p>
+                <a href="#cta" class="btn btn-primary" data-en="Get Custom Quote" data-cn="获取定制报价">Get Custom Quote</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section reveal">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label" data-en="About" data-cn="关于我们">About</p>
+                <h2 class="section-title" data-en="Built for Fashion Founders,<br>By Someone Who Gets It" data-cn="为时尚品牌创始人打造，<br>由懂你的人创建">Built for Fashion Founders,<br>By Someone Who Gets It</h2>
+                <div style="margin: 40px auto 40px; text-align: center;" class="reveal">
+                    <img src="https://i.imgur.com/52xlNt1.jpeg" alt="Xixi - Founder of DCG Media" class="founder-img" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); box-shadow: 0 0 30px var(--accent-glow);">
+                    <p style="margin-top: 16px; font-size: 18px; color: var(--accent); font-weight: 600;" data-en="Xixi, Founder" data-cn="Xixi，创始人">Xixi, Founder</p>
+                </div>
+                <div style="max-width: 700px; margin: 0 auto; text-align: center;">
+                    <p style="font-size: 20px; line-height: 1.8; color: var(--text-secondary); margin-bottom: 24px; font-weight: 500;" data-en="I've sent over 10,000 outreach messages and learned what converts." data-cn="我发送了超过10,000条推广信息并学会了什么能转化。">
+                        I've sent over 10,000 outreach messages and learned what converts.
+                    </p>
+                    <p style="font-size: 20px; line-height: 1.8; color: var(--text-secondary); margin-bottom: 24px; font-weight: 500;" data-en="I personally spent months in influencer DMs before systematizing the entire process. Now I help fashion founders skip the learning curve and get straight to results." data-cn="在创立工作室之前，我个人在网红私信中浪费了数月时间。后来我系统化了整个流程，现在帮助时尚品牌创始人跳过学习曲线，直接获得结果。">
+                        I personally spent months in influencer DMs before systematizing the entire process. Now I help fashion founders skip the learning curve and get straight to results.
+                    </p>
+                    <p style="font-size: 20px; line-height: 1.8; margin-bottom: 32px; font-weight: 500;">
+                        <strong data-en="The truth:" data-cn="事实是：">The truth:</strong> <span data-en="Influencer outreach isn't complex - it's just tedious. You have better things to do than follow up on DMs. That's where I come in." data-cn="网红推广并不复杂 - 只是繁琐。您有比跟进私信更重要的事情要做。这就是我的价值所在。">Influencer outreach isn't complex - it's just tedious. You have better things to do than follow up on DMs. That's where I come in.</span>
+                    </p>
+                    <p style="font-size: 26px; color: var(--accent); font-weight: 700;" data-en="Working with 23 fashion brands and counting." data-cn="正在与23个时尚品牌合作，持续增长中。">
+                        Working with 23 fashion brands and counting.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section reveal">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label" data-en="FAQ" data-cn="常见问题">FAQ</p>
+                <h2 class="section-title" data-en="Common Questions" data-cn="常见问题">Common Questions</h2>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span data-en="How do you select influencers?" data-cn="你们如何选择网红？">How do you select influencers?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer" data-en="Based on your brief, we analyze engagement rates, audience demographics, content style, and brand alignment. Every suggestion is hand-picked, not scraped from databases." data-cn="根据您的简报，我们分析参与率、受众人口统计、内容风格和品牌契合度。每个建议都是精心挑选的，而不是从数据库中抓取的。">
+                        Based on your brief, we analyze engagement rates, audience demographics, content style, and brand alignment. Every suggestion is hand-picked, not scraped from databases.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span data-en="What if the collaboration doesn't work out?" data-cn="如果合作不成功怎么办？">What if the collaboration doesn't work out?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer" data-en="You only pay for completed posts. If products are sent but content isn't delivered, you don't pay." data-cn="您只为完成的发文付费。如果产品已发送但内容未发布，您无需付费。">
+                        You only pay for completed posts. If products are sent but content isn't delivered, you don't pay.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span data-en="Can I review influencers before outreach?" data-cn="我可以在联系前审核网红吗？">Can I review influencers before outreach?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer" data-en="Absolutely. We can work with your pre-approved list or send our recommendations for your approval first." data-cn="当然可以。我们可以使用您预先批准的名单，或先发送我们的推荐供您审核。">
+                        Absolutely. We can work with your pre-approved list or send our recommendations for your approval first.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span data-en="Do you work with all fashion niches?" data-cn="你们与所有时尚细分领域合作吗？">Do you work with all fashion niches?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer" data-en="Yes. Streetwear, sustainable fashion, luxury, accessories and more - we adapt our approach to your brand's specific style and market." data-cn="是的。街头品牌、时尚、奢侈品、配饰等 - 我们根据您品牌的特定风格和市场调整我们的合作方法。">
+                        Yes. Streetwear, sustainable fashion, luxury, accessories and more - we adapt our approach to your brand's specific style and market.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta" class="section reveal">
+        <div class="container">
+            <div class="cta-section">
+                <div class="cta-content">
+                    <h2 class="cta-title" data-en="Let's Get Your Brand in Front of the Right Audience" data-cn="让您的品牌触达正确的受众">Let's Get Your Brand in Front of the Right Audience</h2>
+                    <p class="cta-description" data-en="No contracts. No retainers. Just results." data-cn="无合同。无预付款。只看结果。">
+                        No contracts. No retainers. Just results.
+                    </p>
+                    <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                        <a href="mailto:hello@dcgmedia.com" class="btn btn-primary" data-en="Schedule a Call" data-cn="预约通话">Schedule a Call</a>
+                        <a href="#testimonial" class="btn btn-secondary" data-en="See Sample Results" data-cn="查看案例结果">See Sample Results</a>
+                    </div>
+                    <p style="margin-top: 48px; font-style: italic; color: var(--text-secondary); font-size: 18px; font-weight: 500;" data-en="&quot;The best time to start influencer marketing was yesterday.<br>The second best time is now.&quot;" data-cn="&ldquo;开始网红营销的最佳时机是昨天。<br>第二好的时机是现在。&rdquo;">
+                        "The best time to start influencer marketing was yesterday.<br>The second best time is now."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="mailto:hello@dcgmedia.com" class="footer-link" data-en="Email" data-cn="邮箱">Email</a>
+                    <a href="#" class="footer-link" data-en="LinkedIn" data-cn="领英">LinkedIn</a>
+                    <a href="#testimonial" class="footer-link" data-en="Case Studies" data-cn="案例研究">Case Studies</a>
+                </div>
+                <p class="copyright" data-en="© 2025 DCG Media. Proudly helping fashion brands grow." data-cn="© 2025 DCG Media. 自豪地帮助时尚品牌成长。">© 2025 DCG Media. Proudly helping fashion brands grow.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // FAQ functionality
+        const faqItems = document.querySelectorAll('.faq-question');
+        faqItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.parentElement;
+                const isActive = parent.classList.contains('active');
+                
+                // Close all
+                document.querySelectorAll('.faq-item').forEach(faq => {
+                    faq.classList.remove('active');
+                });
+                
+                // Open clicked if it wasn't active
+                if (!isActive) {
+                    parent.classList.add('active');
+                }
+            });
+        });
+
+        // Reveal on scroll
+        const reveals = document.querySelectorAll('.reveal');
+        const revealOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, revealOptions);
+
+        reveals.forEach(reveal => {
+            revealObserver.observe(reveal);
+        });
+
+        // Language switching
+        let currentLang = 'en';
+        const langButtons = document.querySelectorAll('.lang-switch');
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'cn' : 'en';
+            langButtons.forEach(btn => {
+                btn.textContent = currentLang === 'en' ? '中文' : 'EN';
+            });
+            
+            // Update all elements with data attributes
+            document.querySelectorAll('[data-en][data-cn]').forEach(element => {
+                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                    element.placeholder = element.getAttribute(`data-${currentLang}`);
+                } else {
+                    // Use innerHTML instead of textContent to preserve HTML tags like <br>
+                    element.innerHTML = element.getAttribute(`data-${currentLang}`);
+                }
+            });
+        }
+
+        // Parallax effect on hero gradient
+        const heroGradient = document.querySelector('.hero-gradient');
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 20;
+            const y = (e.clientY / window.innerHeight - 0.5) * 20;
+            heroGradient.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+        });
+    </script>
+</body>
+</html>
