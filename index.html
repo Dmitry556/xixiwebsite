@@ -10,6 +10,39 @@
             padding: 0;
             box-sizing: border-box;
         }
+        
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(124, 58, 237, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* Benefits Section Special Spacing */
+        .benefits-section {
+            padding: 140px 0;
+        }
+
+        @media (max-width: 768px) {
+            .benefits-section {
+                padding: 80px 0;
+            }
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: translateX(100%);
+        }
 
         :root {
             --bg: #0a0a0a;
@@ -339,6 +372,75 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 24px;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+        }
+
+        .feature-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-align: left;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(124, 58, 237, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .benefit-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(124, 58, 237, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            font-size: 24px;
+        }
+
+        .benefit-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.01em;
+            color: var(--text-primary);
+        }
+
+        .benefit-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 17px;
+            font-weight: 500;
         }
 
         .feature-card {
@@ -809,6 +911,11 @@
                 grid-template-columns: 1fr;
             }
 
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
             .cta-section {
                 padding: 48px 24px;
             }
@@ -820,6 +927,16 @@
             
             .footer-links {
                 justify-content: center;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .benefit-card {
+                padding: 48px;
+            }
+            
+            .section {
+                padding: 140px 0;
             }
         }
 
@@ -923,34 +1040,39 @@
     </section>
 
     <!-- Benefits Section -->
-    <section class="section reveal">
+    <section class="section benefits-section reveal">
         <div class="container">
             <div class="section-header">
                 <p class="section-label" data-en="Why Work With Us" data-cn="为什么选择我们">Why Work With Us</p>
                 <h2 class="section-title" data-en="Focus on What Matters" data-cn="专注于重要的事">Focus on What Matters</h2>
+                <p class="section-description" data-en="Let us handle the tedious work while you build your brand" data-cn="让我们处理繁琐的工作，您专注于品牌建设">Let us handle the tedious work while you build your brand</p>
             </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <h3 class="feature-title" data-en="Save 20+ Hours Per Week" data-cn="每周节省20+小时">Save 20+ Hours Per Week</h3>
-                    <p class="feature-description" data-en="Stop spending hours in Instagram DMs. We handle the outreach while you focus on growing your brand." data-cn="不再花费数小时在Instagram私信中。我们处理推广，您专注于品牌成长。">
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">⏰</div>
+                    <h3 class="benefit-title" data-en="Save 20+ Hours Per Week" data-cn="每周节省20+小时">Save 20+ Hours Per Week</h3>
+                    <p class="benefit-description" data-en="Stop spending hours in Instagram DMs. We handle the outreach while you focus on growing your brand." data-cn="不再花费数小时在Instagram私信中。我们处理推广，您专注于品牌成长。">
                         Stop spending hours in Instagram DMs. We handle the outreach while you focus on growing your brand.
                     </p>
                 </div>
-                <div class="feature-card">
-                    <h3 class="feature-title" data-en="Predictable Investment" data-cn="可预测的投资">Predictable Investment</h3>
-                    <p class="feature-description" data-en="Know exactly what each influencer partnership costs. Budget with clarity." data-cn="准确了解每个网红合作的成本。清晰地制定预算。">
+                <div class="benefit-card">
+                    <div class="benefit-icon">💰</div>
+                    <h3 class="benefit-title" data-en="Predictable Investment" data-cn="可预测的投资">Predictable Investment</h3>
+                    <p class="benefit-description" data-en="Know exactly what each influencer partnership costs. Budget with clarity." data-cn="准确了解每个网红合作的成本。清晰地制定预算。">
                         Know exactly what each influencer partnership costs. Budget with clarity.
                     </p>
                 </div>
-                <div class="feature-card">
-                    <h3 class="feature-title" data-en="Higher Response Rates" data-cn="更高的回复率">Higher Response Rates</h3>
-                    <p class="feature-description" data-en="We've tested thousands of messages. We know what converts influencers from &quot;seen&quot; to &quot;yes.&quot;" data-cn="我们测试了数千条信息。我们知道如何让网红从&ldquo;已读&rdquo;变成&ldquo;同意&rdquo;。">
+                <div class="benefit-card">
+                    <div class="benefit-icon">📈</div>
+                    <h3 class="benefit-title" data-en="Higher Response Rates" data-cn="更高的回复率">Higher Response Rates</h3>
+                    <p class="benefit-description" data-en="We've tested thousands of messages. We know what converts influencers from &quot;seen&quot; to &quot;yes.&quot;" data-cn="我们测试了数千条信息。我们知道如何让网红从&ldquo;已读&rdquo;变成&ldquo;同意&rdquo;。">
                         We've tested thousands of messages. We know what converts influencers from "seen" to "yes."
                     </p>
                 </div>
-                <div class="feature-card">
-                    <h3 class="feature-title" data-en="No Learning Curve" data-cn="无需学习曲线">No Learning Curve</h3>
-                    <p class="feature-description" data-en="Skip the months of trial and error. I've already made the mistakes personally and refined the process." data-cn="跳过数月的试错。我个人已经犯过错误并完善了流程。">
+                <div class="benefit-card">
+                    <div class="benefit-icon">🚀</div>
+                    <h3 class="benefit-title" data-en="No Learning Curve" data-cn="无需学习曲线">No Learning Curve</h3>
+                    <p class="benefit-description" data-en="Skip the months of trial and error. I've already made the mistakes personally and refined the process." data-cn="跳过数月的试错。我个人已经犯过错误并完善了流程。">
                         Skip the months of trial and error. I've already made the mistakes personally and refined the process.
                     </p>
                 </div>
