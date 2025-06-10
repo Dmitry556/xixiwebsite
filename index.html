@@ -146,6 +146,11 @@
             box-shadow: 0 8px 24px var(--accent-glow);
         }
 
+        .whatsapp-btn:hover {
+            background: #25d366 !important;
+            box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4) !important;
+        }
+
         .btn-secondary {
             background: transparent;
             color: var(--text-primary);
@@ -739,6 +744,7 @@
         .footer-links {
             display: flex;
             gap: 32px;
+            flex-wrap: wrap;
         }
 
         .footer-link {
@@ -757,6 +763,16 @@
             color: var(--text-muted);
             font-size: 16px;
             font-weight: 500;
+        }
+
+        /* Founder Image */
+        .founder-img {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .founder-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px var(--accent-glow);
         }
 
         /* Mobile */
@@ -801,16 +817,10 @@
                 flex-direction: column;
                 text-align: center;
             }
-        }
-
-        /* Founder Image */
-        .founder-img {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .founder-img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 40px var(--accent-glow);
+            
+            .footer-links {
+                justify-content: center;
+            }
         }
 
         /* Scroll reveal */
@@ -839,7 +849,7 @@
                     <a href="#testimonial" class="nav-link" data-en="Results" data-cn="成果">Results</a>
                     <a href="#pricing" class="nav-link" data-en="Pricing" data-cn="定价">Pricing</a>
                     <button class="lang-switch" onclick="toggleLanguage()">中文</button>
-                    <a href="#cta" class="btn btn-primary" data-en="Get Started" data-cn="开始合作">Get Started</a>
+                    <a href="https://wa.me/8618305918129?text=Hi%20Xixi!%20I'm%20interested%20in%20influencer%20outreach%20for%20my%20fashion%20brand." class="btn btn-primary whatsapp-btn" data-en="💬 Message on WhatsApp" data-cn="💬 WhatsApp 联系我" data-en-link="https://wa.me/8618305918129?text=Hi%20Xixi!%20I'm%20interested%20in%20influencer%20outreach%20for%20my%20fashion%20brand." data-cn-link="https://wa.me/8618305918129?text=你好Xixi！我对时尚品牌的网红推广服务感兴趣。">💬 Message on WhatsApp</a>
                 </div>
             </div>
         </div>
@@ -862,7 +872,7 @@
                     Only pay for secured collaborations.
                 </p>
                 <div class="hero-buttons">
-                    <a href="#cta" class="btn btn-primary" data-en="Get Started" data-cn="开始合作">Get Started</a>
+                    <a href="https://wa.me/8618305918129?text=Hi%20Xixi!%20I'm%20interested%20in%20influencer%20outreach%20for%20my%20fashion%20brand." class="btn btn-primary whatsapp-btn" data-en="💬 Message on WhatsApp" data-cn="💬 WhatsApp 联系我" data-en-link="https://wa.me/8618305918129?text=Hi%20Xixi!%20I'm%20interested%20in%20influencer%20outreach%20for%20my%20fashion%20brand." data-cn-link="https://wa.me/8618305918129?text=你好Xixi！我对时尚品牌的网红推广服务感兴趣。">💬 Message on WhatsApp</a>
                     <a href="#process" class="btn btn-secondary" data-en="See Our Process" data-cn="查看我们的流程">See Our Process</a>
                 </div>
             </div>
@@ -1071,7 +1081,7 @@
                 <p style="color: var(--text-muted); font-size: 16px; margin-bottom: 32px; font-weight: 500;" data-en="No setup fees. No monthly minimums. Cancel anytime." data-cn="无设置费。无月度最低消费。随时取消。">
                     No setup fees. No monthly minimums. Cancel anytime.
                 </p>
-                <a href="#cta" class="btn btn-primary" data-en="Get Custom Quote" data-cn="获取定制报价">Get Custom Quote</a>
+                <a href="https://wa.me/8618305918129?text=Hi%20Xixi!%20I'd%20like%20a%20custom%20quote%20for%20influencer%20outreach." class="btn btn-primary whatsapp-btn" data-en="💬 Get Custom Quote" data-cn="💬 获取定制报价" data-en-link="https://wa.me/8618305918129?text=Hi%20Xixi!%20I'd%20like%20a%20custom%20quote%20for%20influencer%20outreach." data-cn-link="https://wa.me/8618305918129?text=你好Xixi！我想获取网红推广的定制报价。">💬 Get Custom Quote</a>
             </div>
         </div>
     </section>
@@ -1087,11 +1097,8 @@
                     <p style="margin-top: 16px; font-size: 18px; color: var(--accent); font-weight: 600;" data-en="Xixi, Founder" data-cn="Xixi，创始人">Xixi, Founder</p>
                 </div>
                 <div style="max-width: 700px; margin: 0 auto; text-align: center;">
-                    <p style="font-size: 20px; line-height: 1.8; color: var(--text-secondary); margin-bottom: 24px; font-weight: 500;" data-en="I've sent over 10,000 outreach messages and learned what converts." data-cn="我发送了超过10,000条推广信息并学会了什么能转化。">
-                        I've sent over 10,000 outreach messages and learned what converts.
-                    </p>
-                    <p style="font-size: 20px; line-height: 1.8; color: var(--text-secondary); margin-bottom: 24px; font-weight: 500;" data-en="I personally spent months in influencer DMs before systematizing the entire process. Now I help fashion founders skip the learning curve and get straight to results." data-cn="在创立工作室之前，我个人在网红私信中浪费了数月时间。后来我系统化了整个流程，现在帮助时尚品牌创始人跳过学习曲线，直接获得结果。">
-                        I personally spent months in influencer DMs before systematizing the entire process. Now I help fashion founders skip the learning curve and get straight to results.
+                    <p style="font-size: 20px; line-height: 1.8; color: var(--text-secondary); margin-bottom: 24px; font-weight: 500;" data-en="I've sent over 10,000 outreach messages and learned what converts. I personally spent months in influencer DMs before systematizing the entire process. Now I help fashion founders skip the learning curve and get straight to results." data-cn="我发送了超过10,000条推广信息并学会了什么能转化。在创立工作室之前，我个人在网红私信中浪费了数月时间。后来我系统化了整个流程，现在帮助时尚品牌创始人跳过学习曲线，直接获得结果。">
+                        I've sent over 10,000 outreach messages and learned what converts. I personally spent months in influencer DMs before systematizing the entire process. Now I help fashion founders skip the learning curve and get straight to results.
                     </p>
                     <p style="font-size: 20px; line-height: 1.8; margin-bottom: 32px; font-weight: 500;">
                         <strong data-en="The truth:" data-cn="事实是：">The truth:</strong> <span data-en="Influencer outreach isn't complex - it's just tedious. You have better things to do than follow up on DMs. That's where I come in." data-cn="网红推广并不复杂 - 只是繁琐。您有比跟进私信更重要的事情要做。这就是我的价值所在。">Influencer outreach isn't complex - it's just tedious. You have better things to do than follow up on DMs. That's where I come in.</span>
@@ -1162,7 +1169,7 @@
                         No contracts. No retainers. Just results.
                     </p>
                     <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-                        <a href="mailto:hello@dcgmedia.com" class="btn btn-primary" data-en="Schedule a Call" data-cn="预约通话">Schedule a Call</a>
+                        <a href="https://wa.me/8618305918129?text=Hi%20Xixi!%20I'm%20interested%20in%20influencer%20outreach%20for%20my%20fashion%20brand." class="btn btn-primary whatsapp-btn" data-en="💬 Message on WhatsApp" data-cn="💬 WhatsApp 联系我" data-en-link="https://wa.me/8618305918129?text=Hi%20Xixi!%20I'm%20interested%20in%20influencer%20outreach%20for%20my%20fashion%20brand." data-cn-link="https://wa.me/8618305918129?text=你好Xixi！我对时尚品牌的网红推广服务感兴趣。">💬 Message on WhatsApp</a>
                         <a href="#testimonial" class="btn btn-secondary" data-en="See Sample Results" data-cn="查看案例结果">See Sample Results</a>
                     </div>
                     <p style="margin-top: 48px; font-style: italic; color: var(--text-secondary); font-size: 18px; font-weight: 500;" data-en="&quot;The best time to start influencer marketing was yesterday.<br>The second best time is now.&quot;" data-cn="&ldquo;开始网红营销的最佳时机是昨天。<br>第二好的时机是现在。&rdquo;">
@@ -1178,6 +1185,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-links">
+                    <a href="https://wa.me/8618305918129" class="footer-link" data-en="WhatsApp: +86 183 0591 8129" data-cn="WhatsApp: +86 183 0591 8129">WhatsApp: +86 183 0591 8129</a>
                     <a href="mailto:hello@dcgmedia.com" class="footer-link" data-en="Email" data-cn="邮箱">Email</a>
                     <a href="#" class="footer-link" data-en="LinkedIn" data-cn="领英">LinkedIn</a>
                     <a href="#testimonial" class="footer-link" data-en="Case Studies" data-cn="案例研究">Case Studies</a>
@@ -1274,6 +1282,14 @@
                 } else {
                     // Use innerHTML instead of textContent to preserve HTML tags like <br>
                     element.innerHTML = element.getAttribute(`data-${currentLang}`);
+                }
+            });
+            
+            // Update WhatsApp links
+            document.querySelectorAll('.whatsapp-btn').forEach(btn => {
+                const link = btn.getAttribute(`data-${currentLang}-link`);
+                if (link) {
+                    btn.href = link;
                 }
             });
         }
