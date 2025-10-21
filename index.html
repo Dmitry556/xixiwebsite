@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DCG Media - Influencer Outreach for Fashion Brands</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <style>
         * {
             margin: 0;
@@ -951,6 +952,288 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* ROI Calculator Styles */
+        .roi-input-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .roi-inputs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .roi-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .roi-input-group label {
+            font-weight: 600;
+            font-size: 16px;
+            color: var(--text-primary);
+        }
+
+        .roi-input-group input {
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .roi-input-group input:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .input-help {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .roi-comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-bottom: 48px;
+        }
+
+        .roi-comparison-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .roi-comparison-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .roi-diy-card {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .roi-dcg-card {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.15) 0%, rgba(167, 139, 250, 0.1) 100%);
+            border: 2px solid var(--accent);
+        }
+
+        .roi-dcg-card:hover {
+            border-color: var(--accent-light);
+            box-shadow: 0 20px 40px var(--accent-glow);
+        }
+
+        .roi-card-header {
+            padding: 24px 32px;
+            background: rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .roi-dcg-card .roi-card-header {
+            background: rgba(124, 58, 237, 0.2);
+            border-bottom: 1px solid rgba(124, 58, 237, 0.3);
+        }
+
+        .roi-card-header h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .roi-card-body {
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .roi-metric {
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .roi-metric:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .roi-metric-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 15px;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .roi-metric-value {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .roi-progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 100px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .roi-progress-fill {
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 100px;
+            transition: width 0.5s ease;
+        }
+
+        .roi-progress-bar-dcg {
+            background: rgba(124, 58, 237, 0.2);
+        }
+
+        .roi-progress-fill-dcg {
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
+        }
+
+        .roi-additional {
+            margin-top: 8px;
+            font-size: 14px;
+            color: var(--accent-light);
+            font-weight: 600;
+        }
+
+        .roi-additional-small {
+            font-size: 14px;
+            color: #fbbf24;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .roi-metric-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .roi-metric-big {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .roi-metric-small {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        .roi-summary-section {
+            background: linear-gradient(135deg, rgba(15, 15, 15, 1) 0%, rgba(20, 20, 20, 1) 100%);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 48px;
+        }
+
+        .roi-summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .roi-summary-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .roi-summary-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-4px);
+        }
+
+        .roi-summary-icon {
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+
+        .roi-summary-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .roi-summary-value {
+            font-size: 40px;
+            font-weight: 900;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .roi-bottom-line {
+            background: rgba(124, 58, 237, 0.1);
+            border: 2px solid rgba(124, 58, 237, 0.3);
+            border-radius: 16px;
+            padding: 32px;
+        }
+
+        .roi-bottom-line-content {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .roi-bottom-line-content p {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .roi-input-section {
+                padding: 24px;
+            }
+
+            .roi-inputs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .roi-comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .roi-summary-section {
+                padding: 32px 24px;
+            }
+
+            .roi-summary-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -962,6 +1245,7 @@
                 <button class="lang-switch mobile-only" onclick="toggleLanguage()">中文</button>
                 <div class="nav-links">
                     <a href="#services" class="nav-link" data-en="Services" data-cn="服务">Services</a>
+                    <a href="roi-calculator.html" class="nav-link" data-en="ROI Calculator" data-cn="投资回报计算器">ROI Calculator</a>
                     <a href="#process" class="nav-link" data-en="Process" data-cn="流程">Process</a>
                     <a href="#testimonial" class="nav-link" data-en="Results" data-cn="成果">Results</a>
                     <a href="#pricing" class="nav-link" data-en="Pricing" data-cn="定价">Pricing</a>
@@ -1396,7 +1680,7 @@
             langButtons.forEach(btn => {
                 btn.textContent = currentLang === 'en' ? '中文' : 'EN';
             });
-            
+
             // Update all elements with data attributes
             document.querySelectorAll('[data-en][data-cn]').forEach(element => {
                 if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
@@ -1406,7 +1690,7 @@
                     element.innerHTML = element.getAttribute(`data-${currentLang}`);
                 }
             });
-            
+
             // Update WhatsApp links
             document.querySelectorAll('.whatsapp-btn').forEach(btn => {
                 const link = btn.getAttribute(`data-${currentLang}-link`);
